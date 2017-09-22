@@ -61,7 +61,7 @@ export class AuthService {
 
   signInWithProvider(provider) {
     this.enterPending();
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .catch(err  => this.handleAuthError(err));
   }
 
@@ -72,13 +72,13 @@ export class AuthService {
 
   signInWithEmail(email, password) {
     this.enterPending();
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .catch(err => this.handleAuthError(err));
   }
 
   signUp(email, password, displayName) {
     this.enterPending();
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(userInfo => userInfo.updateProfile({ displayName }))
       .catch(err => this.handleAuthError(err));
   }

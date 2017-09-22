@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sb-sign-in-with-email',
@@ -63,15 +64,18 @@ export class SignInWithEmailComponent implements OnInit {
     return null;
   }
 
-  constructor(private userService: AuthService) {
+  constructor(
+    private userService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit() {
   }
 
   signInWithEmail() {
-    return this.signUp
+    return (this.signUp
       ? this.userService.signUp(this.user.email, this.user.password, this.user.displayName)
-      : this.userService.signInWithEmail(this.user.email, this.user.password);
+      : this.userService.signInWithEmail(this.user.email, this.user.password))
+      .then(() => this.router.navigate(['/songbook']));
   }
 }

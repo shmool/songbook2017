@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sb-sign-in-with-provider',
@@ -25,14 +26,16 @@ import { environment } from '../../../environments/environment';
 export class SignInWithProviderComponent implements OnInit {
   providers = environment.firebaseAuthProviders;
 
-  constructor(private userService: AuthService) {
+  constructor(private userService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
   }
 
   signInWithProvider(provider) {
-    return this.userService.signInWithProvider(provider);
+    return this.userService.signInWithProvider(provider)
+      .then(() => this.router.navigate(['/songbook']));
   }
 
 }
