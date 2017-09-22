@@ -1,0 +1,67 @@
+.sign-in-with-provider {
+  margin: 0 auto;
+  max-width: 248px;
+  width: 220px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 15px;
+    text-align: center;
+
+    button.auth {
+      padding: 8px 16px;
+      width: 100%;
+      text-align: left;
+      font-weight: 600;
+      line-height: normal;
+      color: #ffffff;
+
+      &.google {
+        background-color: #ffffff;
+        color: #757575;
+      }
+
+      &.facebook {
+        background-color: #3b5998;
+      }
+
+      &.twitter {
+        background-color: #55acee;
+      }
+
+      &.github {
+        background-color: #333333;
+      }
+
+      &.phone {
+        background-color: #02bd7e;
+      }
+
+      .auth-button-text {
+        display: table-cell;
+        font-size: 14px;
+        padding-left: 16px;
+        text-transform: none;
+        vertical-align: middle;
+        line-height: normal;
+      }
+
+      .auth-img-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      img {
+        border: none;
+        display: inline-block;
+        height: 18px;
+        vertical-align: middle;
+        width: 18px;
+      }
+    }
+  }
+}

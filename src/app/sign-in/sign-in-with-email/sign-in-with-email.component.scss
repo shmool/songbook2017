@@ -1,0 +1,35 @@
+.sign-in-with-email {
+  margin: 0 auto;
+  max-width: 248px;
+  width: 220px;
+}
+
+.mat-input-container {
+  width: 100%;
+}
+
+button {
+  margin-bottom: 10px;
+  padding: 6px 24px;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+
+  md-icon {
+    margin-right: 12px;
+  }
+}
+
+.sign-in-or-up {
+  line-height: 14px;
+  color: gray;
+  padding-bottom: 10px;
+
+  .sign-in-input {
+    width: 100%;
+  }
+}
+
+.sign-in-btn {
+  text-align: center;
+}

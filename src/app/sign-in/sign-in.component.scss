@@ -1,0 +1,26 @@
+.sign-in {
+  background-color: #EFEFEF;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+
+  h1, h2 {
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
+    color: rgba(0, 0, 0, .54);
+  }
+
+  h1 {
+    padding-top: 50px;
+    padding-bottom: 36px;
+    font-size: 24px;
+  }
+
+  h2 {
+    margin: auto 0;
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+
+}

@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.song-book-toolbar-menu {
+  min-width: 0;
+  padding: 0;
+
+  .song-book-toolbar-menu-icon {
+    padding: 0 14px 0 14px;
+  }
+}
+
+.song-title-input {
+  color: black;
+}
+
+.song-book-content {
+  overflow: auto;
+  height: 100%;
+  padding: 20px;
+}
+
+.not-saving-warning {
+  color: red;
+  font-size: 12px;
+}
