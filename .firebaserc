@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "song-book-not-pwa"
+    "default": "song-book-not-pwa",
+    "pwa-demo": "song-book-pwa",
+    "pwa-final": "song-book-e2ba5"
   }
 }
