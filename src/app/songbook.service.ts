@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/filter';
 
 export interface Song {
   $key?: string;
@@ -16,8 +14,10 @@ export interface Song {
 
 @Injectable()
 export class SongbookService {
+  songList$;
 
   constructor(private db: AngularFireDatabase, private http: HttpClient) {
+    this.getSongList();
   }
 
   getSong(id): Observable<Song> {
@@ -32,18 +32,26 @@ export class SongbookService {
       title: song.title || '',
       lyrics: song.lyrics || ''
     };
-    return this.db.object(`/songs/${song.$key}`).update(songCopy);
+    return this.db.object(`/songs/${song.$key}`).update(songCopy)
+      .then((savedSong) => {
+        this.getSongList();
+        return savedSong;
+      });
   }
 
   saveSong(song) {
-    return this.db.list(`/songs`).push(song);
+    return this.db.list(`/songs`).push(song)
+      .then((savedSong) => {
+        this.getSongList();
+        return savedSong;
+      });
   }
 
   getSongList() {
-    return this.http.get(`${environment.firebase.databaseURL}/songs.json`)
+    this.songList$ = this.http.get(`${environment.firebase.databaseURL}/songList.json`)
       .map(res => {
-        return Object.keys(res).map((item, index) => {
-          return { $key: item, ...res[item] };
+        return Object.keys(res).map(key => {
+          return { $key: key, title: res[key] };
         });
       });
   }

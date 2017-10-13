@@ -5,7 +5,7 @@ import { SongbookService } from '../../songbook.service';
   selector: 'sb-song-list',
   template: `
     <md-list>
-      <md-list-item *ngFor="let item of songs$ | async; index as i;"
+      <md-list-item *ngFor="let item of songs$ | async"
                     [routerLink]="['/songbook', item.$key]"
                     class="router-link">{{ item.title }}
       </md-list-item>
@@ -20,7 +20,7 @@ export class SongListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.songs$ = this.songbookService.getSongList();
+    this.songs$ = this.songbookService.songList$;
   }
 
 }

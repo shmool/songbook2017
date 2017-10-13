@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Song, SongbookService } from '../../songbook.service';
+import { AuthService } from '../../auth.service';
 import 'rxjs/add/operator/do';
 
 @Component({
@@ -22,7 +23,9 @@ import 'rxjs/add/operator/do';
                [placeholder]="edit ? 'song title': ''">
       </md-input-container>
 
-      <a [routerLink]="[]" [queryParams]="{edit: !edit}">
+      <a *ngIf="(uid$ | async) && (uid$ | async) === (song$ | async)?.uid"
+         [routerLink]="[]"
+         [queryParams]="{edit: !edit}">
         <button md-mini-fab [color]="saveButtonColor">
           <md-icon>{{ edit ? 'save' : 'edit' }}</md-icon>
         </button>
@@ -30,7 +33,9 @@ import 'rxjs/add/operator/do';
 
       <span class="app-toolbar-filler"></span>
 
-      <a [routerLink]="['/songbook']" [queryParams]="{edit: true}">
+      <a *ngIf="(uid$ | async)"
+         [routerLink]="['/songbook']"
+         [queryParams]="{edit: true}">
         <button md-mini-fab>
           <md-icon>note_add</md-icon>
         </button>
@@ -55,11 +60,13 @@ export class SongComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter();
   song: Song;
   saveButtonColor = 'accent';
+  uid$;
 
   constructor(
     private songbookService: SongbookService,
     public router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -73,6 +80,7 @@ export class SongComponent implements OnInit {
     this.route.queryParams.forEach(param => {
       this.edit = (!param.edit || param.edit === 'false') ? false : true;
     });
+    this.uid$ = this.authService.uid$;
   }
 
   saveSong() {
